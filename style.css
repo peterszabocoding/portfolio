@@ -336,6 +336,18 @@ h1 {
   object-fit: cover;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
+.project-link {
+  display: inline-block;
+  margin-top: 0.5em;
+  font-size: 0.98em;
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.project-link:hover {
+  text-decoration: underline;
+  color: #1e40af;
+}
 @media (max-width: 900px) {
   .project-entry {
     flex-direction: column;
