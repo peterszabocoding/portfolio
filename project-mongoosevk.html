@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Detail - MongooseVK</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-left">
+      <span class="profile-dot"></span>
+      <span class="profile-name">Peter Szabo</span>
+      <span class="profile-title">Professional Software Developer</span>
+    </div>
+    <nav class="header-nav">
+      <ul>
+        <li><a href="index.html#resume">Resume</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="https://github.com/peterszabocoding">Github</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="project-detail-hero">
+      <h1 class="project-title">MongooseVK</h1>
+      <h2 class="project-subtitle">A Vulkan-based Real-Time Renderer</h2>
+      <div class="project-banner">
+        <img src="img/mongoose_banner.jpg" alt="MongooseVK Banner" class="banner-img" />
+      </div>
+      <div class="project-detail-top">
+        <nav class="project-toc">
+          <h3 class="toc-title">Table of Contents</h3>
+          <ul class="toc-list">
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#structure">Project structure</a></li>
+            <li><a href="#pipeline">Rendering pipeline</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="#user_interface">User Interface</a></li>
+            <li><a href="#features">Feature Highlights</a></li>
+            <li><a href="#challenges">Challenges</a></li>
+            <li><a href="#planned_features">Planned Features</a></li>
+          </ul>
+        </nav>
+        <div class="project-detail-text">
+          <h3 id="intro" class="section-title">Introduction</h3>
+          <p>
+            This project is a deep dive into the Vulkan graphics API, aimed at building a real-time 3D renderer from the ground up. 
+            Written in C++, the renderer serves as both a learning platform and a foundation for future projects. 
+            The primary goal is to gain hands-on experience with Vulkan's explicit and low-level design while developing a 
+            modular rendering system that can later be reused as a standalone library.
+          </p>
+        </div>
+      </div>
+      <hr class="section-divider" />
+      <section id="structure" class="project-section">
+        <div class="section-flex">
+          <div class="section-text">
+            <h3 class="section-title">Project structure</h3>
+            <p>
+                The renderer is structured into two main components:
+                <br><br>
+                    <b>Engine Library: </b>A statically linked C++ library that encapsulates all Vulkan-related functionality. This includes rendering abstractions, resource management, and core engine systems. Designed with reusability in mind, this library is intended to serve as the foundation for future applications or integrations.</li>
+                    <br><br>
+                    <b>Demo Application: </b>A standalone executable that links against the engine library. It provides a sandbox environment for testing and visualizing engine features in real time.</li>
+                    <br><br>
+                The project uses CMake as its build system, handling project generation, dependency management, and configuration across multiple platforms and build types. This ensures consistent builds and streamlined integration of external libraries.                
+            </p>
+          </div>
+          <div class="section-image">
+            <img src="img/mongoose_1.jpg" alt="Architecture Diagram" class="section-img" />
+          </div>
+        </div>
+      </section>
+      <hr class="section-divider" />
+      <section id="pipeline" class="project-section">
+        <div class="section-flex section-flex-reverse">
+          <div class="section-text">
+            <h3 class="section-title">Rendering pipeline</h3>
+            <p>
+                The renderer implements a physically based rendering (PBR) pipeline using the metallic-roughness workflow. This approach aims to produce realistic materials and lighting by simulating how light interacts with surfaces based on physical properties.
+                <br><br>Key components of the pipeline include:<br><br>
+                
+                <b>Lighting: </b>A single directional light is currently supported, complete with shadow mapping to provide dynamic shadows and depth perception in the scene.
+                <br><br>
+                <b>Image-Based Lighting (IBL): </b>A high dynamic range (HDR) image is used as the source for both the environment cubemap and static reflections. This same HDR data is processed for diffuse and specular IBL, enhancing material realism through indirect lighting.    
+                <br><br>
+                <b>Skybox: </b>The scene’s background is rendered using a cubemap, derived from the HDR environment, giving a sense of immersion and realistic ambient contribution.
+                
+            </p>
+          </div>
+          <div class="section-image">
+            <img src="img/mongoose_2.jpg" alt="Features Screenshot" class="section-img" />
+          </div>
+        </div>
+      </section>
+      <hr class="section-divider" />
+      <section id="resources" class="project-section">
+        <div class="section-flex">
+          <div class="section-text">
+            <h3 class="section-title">Resources</h3>
+            <p>
+                <b>Scene Importing: </b>To enable working with larger scenes without the need for an in-engine editor, the renderer loads complete scene data—meshes, materials, and textures—directly from a GLTF file. This approach allows complex environments to be brought into the renderer quickly and consistently using a standardized format.
+                <br><br><br><br>
+                <b>Lighting & Environment: </b>While most scene data comes from the GLTF file, lights (currently a directional light) and the skybox are added programmatically. This allows for flexible control over lighting setups and environmental configuration.
+                <br><br><br><br>
+                <b>Shaders: </b>All shaders are authored in GLSL (OpenGL Shading Language). At runtime, these shaders are compiled into SPIR-V—Vulkan’s native shader format—when a scene is loaded. The system currently supports vertex and fragment shaders, with plans to extend support to additional shader stages in the future.
+            </p>
+          </div>
+          <div class="section-image">
+            <img src="img/GlTF_logo.png" alt="Future Work Placeholder" class="section-img" />
+          </div>
+        </div>
+      </section>
+      <hr class="section-divider" />
+      <section id="user_interface" class="project-section">
+        <div class="section-flex section-flex-reverse">
+          <div class="section-text">
+            <h3 class="section-title">User Interface</h3>
+            <p>
+                The renderer integrates ImGui, a popular immediate-mode GUI library for C++, to provide a lightweight and responsive user interface layer.
+                <br><br>
+                The UI serves several key purposes:
+                <br><br>
+                <b>Parameter Control: </b>Real-time adjustment of rendering parameters.
+                <br><br>
+                <b>Visualization: </b>On-screen display of internal engine data such as frame timings, camera parameters, light directions, etc.
+                <br><br>
+                <b>Debug Views: </b>The UI also enables visualizing various internal textures (e.g., shadow maps, G-buffer) to aid in debugging and development.
+            </p>
+          </div>
+          <div class="section-image">
+            <img src="img/mongoose_3.jpg" alt="Features Screenshot" class="section-img" />
+          </div>
+        </div>
+      </section>
+      <hr class="section-divider" />
+      <section id="features" class="project-section">
+        <div class="section-flex">
+          <div class="section-text">
+            <h3 class="section-title">Feature Highlights</h3>
+            <p>
+                <b>Screen Space Ambient Occlusion (SSAO): </b>A simple yet effective implementation of SSAO adds subtle shadowing in creases and contact areas, improving depth perception and surface detail without the need for global illumination.
+                <br><br>
+                <b>Cascaded Shadow Maps (CSM): </b>For the directional light, cascaded shadow mapping is used to maintain high-resolution shadows across a wide view frustum. This ensures better shadow quality in both near and distant scene regions.
+                <br><br>
+                <b>Infinite Ground Grid: </b>A dynamic, camera-aligned ground grid helps ground the scene visually and provides a spatial reference—especially useful for previewing assets in large or open environments.
+            </p>
+          </div>
+          
+        </div>
+        <div class="section-image">
+            <img src="img/mongoose_4.jpg" alt="Future Work Placeholder" class="section-img" />
+        </div>
+        <div class="section-image">
+            <img src="img/mongoose_5.jpg" alt="Future Work Placeholder" class="section-img" />
+        </div>
+      </section>
+      <hr class="section-divider" />
+      <section id="challenges" class="project-section">
+        <div class="section-flex">
+          <div class="section-text">
+            <h3 class="section-title">Challenges</h3>
+            <p>
+                Developing a renderer with Vulkan poses a unique set of challenges due to its explicit, low-level nature. This project has been a hands-on exploration of several core areas:
+                <br><br>
+                <b>Understanding Vulkan's Architecture: </b>A major early challenge was simply learning how Vulkan is structured—its separation of concerns, synchronization model, and the many stages involved in creating and managing GPU resources. Gaining a clear mental model of Vulkan's building blocks was essential before writing any meaningful code.
+                <br><br>
+                <b>Abstraction Layer / API Wrapping: </b>To manage Vulkan's verbosity and complexity, a custom wrapper layer was implemented around the core API.
+                <br><br>
+                <b>Resource & Memory Management: </b>Instead of relying on RAII and (smart) pointers, the renderer uses object memory pools and handle-based access for managing Vulkan resources. This approach helps with memory efficiency, lifetime tracking, and avoids common pitfalls with dangling references or ownership ambiguity.
+                <br><br>
+                <b>Bindless Textures: </b>To simplify texture usage and reduce descriptor set complexity, the renderer supports bindless textures. This allows shaders to access a large number of textures through an index, enabling more flexible material systems.
+                <br><br>
+                <b>Material Pooling: </b>Material parameters are stored in a large, contiguous pool, and shaders reference them by index. This enables efficient GPU access and helps avoid redundant state changes or material duplication.
+            </p>
+          </div>
+        </div>
+      </section>
+      <hr class="section-divider" />
+      <section id="planned_features" class="project-section">
+        <div class="section-flex">
+          <div class="section-text">
+            <h3 class="section-title">Planned Features</h3>
+            <p>
+                Several key improvements and architectural enhancements are planned to evolve the renderer into a more powerful and reusable system:
+                <br><br>
+                <b>Frame Graph System: </b> A frame graph will be introduced to manage render passes, resource lifetimes, and image layout transitions automatically. 
+                This will help reduce boilerplate code and provide better control over render passes.
+                <br><br>
+                <b>Multi-threading: </b>Improve load times and better hardware utilization.
+                <br><br>
+                <b>Library: </b>The engine is being refactored to become a modular, reusable library, separating core functionality from the demo application. This will allow future projects to integrate the renderer as a plug-and-play component.
+                <br><br>
+                <b>Advanced Rendering Features: </b>Many features from a prior OpenGL renderer are planned for implementation in Vulkan, including:
+                <ul>    
+                    <li>Support for additional light source types (point, spot)</li>
+                    <li>A shadow map atlas for managing multiple dynamic shadows efficiently</li>
+                    <li>A dynamic sky system with atmospheric scattering</li>
+                    <li>A range of post-processing effects (bloom, tone mapping, exposure control, etc.)</li>
+                </ul>
+            </p>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html> 
