@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Detail - LearnOpenGL</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-left">
+      <span class="profile-dot"></span>
+      <span class="profile-name">Peter Szabo</span>
+      <span class="profile-title">Professional Software Developer</span>
+    </div>
+    <nav class="header-nav">
+      <ul>
+        <li><a href="index.html#resume">Resume</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="https://github.com/peterszabocoding">Github</a></li>
+        <li><a href="https://www.artstation.com/pterszab">ArtStation</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="project-detail-hero">
+      <h1 class="project-title">LearnOpenGL</h1>
+      <h2 class="project-subtitle">OpenGL based renderer and editor app</h2>
+      <div class="project-banner">
+        <img src="img/learnopengl_banner.jpg" alt="MongooseVK Banner" class="banner-img" />
+      </div>
+      <div class="project-detail-top">
+        <nav class="project-toc">
+          <h3 class="toc-title">Table of Contents</h3>
+          <ul class="toc-list">
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#learning_materials">Learning Materials</a></li>
+            <li><a href="#build_structure">Build Tools and Project Structure</a></li>
+            <li><a href="#user_interface">User Interface</a></li>
+            <li><a href="#lighting">Lighting</a></li>
+            <li><a href="#shadow_map">Shadow Map Atlas</a></li>
+            <li><a href="#ecs">ECS</a></li>
+            <li><a href="#challenges">Project Challenges</a></li>
+          </ul>
+        </nav>
+        <div class="project-detail-text">
+          <h3 id="intro" class="section-title">Introduction</h3>
+          <p>
+            This project is a custom-built OpenGL renderer and level editor application developed to explore and understand the fundamentals 
+            of real-time computer graphics. Written in C++ and powered by the OpenGL API, it serves as a hands-on learning experience 
+            focused on core rendering concepts, graphics pipeline mechanics, and scene management. To make the process more interactive 
+            and practical, the project also features a built-in level editor, allowing for the creation, modification, 
+            and visualization of scenes in real time. This combination of renderer and editor provides a comprehensive environment 
+            for both experimenting with graphics techniques and designing visual content dynamically.
+          </p>
+        </div>
+      </div>
+      <hr class="section-divider" />
+      <section id="learning_materials" class="project-section">
+        <div class="section-flex">
+          <div class="section-text">
+            <h3 class="section-title">Learning Materials</h3>
+            <p>
+              This project was built with the help of several foundational resources in graphics programming and engine development. 
+              Key references include <a href="https://www.youtube.com/watch?v=JxIZbV_XjAs&list=PLlrATfBNZ98dC-V-N3m0Go4deliWHPFwT"><b>TheCherno's Game Engine video series</b></a> 
+              and the accompanying <a href="https://github.com/TheCherno/Hazel"><b>Hazel engine</b></a>, which provided 
+              valuable insights into architecture and workflow. The comprehensive tutorials from <a href="https://learnopengl.com/"><b>learnopengl.com</b></a> served as a primary 
+              guide for understanding the OpenGL pipeline and rendering techniques. Additionally, the 
+              <a href="http://www.opengl-redbook.com/"><b>OpenGL Programming Guide (commonly known as the "Red Book")</b></a> 
+              offered in-depth explanations of the API's inner workings. Practical shader 
+              techniques and inspiration were also drawn from Shadertoy examples. Beyond these, countless other articles, 
+              documentation, and open-source projects contributed to the learning process.            
+            </p>
+          </div>
+        </div>
+      </section>
+      <hr class="section-divider" />
+      <section id="build_structure" class="project-section">
+        <div class="section-flex section-flex-reverse">
+          <div class="section-text">
+            <h3 class="section-title">Build Tools and Project Structure</h3>
+            <p>
+              Instead of relying on CMake, this project utilizes <a href="https://premake.github.io/"><b>Premake</b></a>, a lightweight 
+              and flexible build configuration tool that simplifies project setup across platforms. 
+              The application is organized into two main components. The first, LearnOpenGL, serves as the core engine module. 
+              It encapsulates the foundational systems such as rendering, input handling, an Entity-Component-System (ECS) architecture, 
+              resource management, and integration with the ImGui library for creating real-time UI panels. This modular design 
+              helps keep the engine logic organized and reusable across different parts of the application.
+            </p>
+          </div>
+          <div class="section-image">
+            <img src="img/learnopengl_1.jpg" alt="Features Screenshot" class="section-img" />
+          </div>
+        </div>
+      </section>
+      <hr class="section-divider" />
+      <section id="user_interface" class="project-section">
+        <div class="section-flex">
+          <div class="section-text">
+            <h3 class="section-title">User Interface</h3>
+            <p>
+              The editor’s user interface is built using <b>ImGui</b>, leveraging its docking system to create a modular, flexible workspace 
+              similar to game engines like Unity. The layout consists of several key panels, such as the Render panel, an Asset Browser for 
+              navigating project resources, an Outliner to display the scene entities, and an Entity/Asset Inspector where users can 
+              view and edit properties specific to selected entities or assets. Additionally, a Framebuffer view panel is available for 
+              real-time debugging and visual feedback, making it easier to inspect rendering output directly within the editor environment.
+            </p>
+          </div>
+          
+        </div>
+        <div class="section-image">
+            <img src="img/learnopengl_4.jpg" alt="Future Work Placeholder" class="section-img" />
+        </div>
+      </section>
+      <hr class="section-divider" />
+      <section id="lighting" class="project-section">
+        <div class="section-flex">
+          <div class="section-text">
+            <h3 class="section-title">Lighting</h3>
+            <p>
+              The renderer supports all three fundamental types of lighting used in real-time graphics: <b>pointlights</b>, 
+              <b>spotlights</b>, and a <b>directional light</b>. Each light type is implemented with basic shading and includes support for shadow 
+              mapping, spotlights and the single directional light share a high-resolution depth map for 
+              their shadows, while for pointlights, the renderer uses a dedicated 
+              cubemap shadow mapping technique to account for their omnidirectional nature.
+            </p>
+          </div>
+          <div class="section-image">
+            <img src="img/learnopengl_2.jpg" alt="Future Work Placeholder" class="section-img" />
+          </div>
+        </div>
+      </section>
+      <hr class="section-divider" />
+      <section id="shadow_map" class="project-section">
+        <div class="section-flex section-flex-reverse">
+          <div class="section-text">
+            <h3 class="section-title">Shadow Map Atlas</h3>
+            <p>
+              To efficiently manage multiple shadow-casting lights, the renderer implements a shadow map atlas—a technique 
+              inspired by the rendering system used in DOOM (2016) with the idTech 6 engine. 
+              This approach was studied in detail through <a href="https://www.adriancourreges.com/blog/2016/09/09/doom-2016-graphics-study/"><b>Adrian Courrèges’ case study</b></a>, which 
+              provided key insights into how multiple shadow maps can be packed into a single large. For the actual atlas generation 
+              and packing, the project uses <a href="https://lisyarus.github.io/blog/posts/texture-packing.html"><b>Nikita Lisitsa's texture packing algorithm</b></a>, which offers a 
+              practical and robust solution for placing varying-sized shadow maps within a single texture. 
+              This setup enables better GPU resource utilization and lays the groundwork for scalable, 
+              multi-light shadow rendering.
+            </p>
+          </div>
+          <div class="section-image">
+            <img src="img/learnopengl_3.jpg" alt="Features Screenshot" class="section-img" />
+          </div>
+        </div>
+      </section>
+      <hr class="section-divider" />
+      <section id="ecs" class="project-section">
+        <div class="section-flex">
+          <div class="section-text">
+            <h3 class="section-title">Entity Component System (ECS)</h3>
+            <p>
+              After extensive research and experimentation, the ECS implementation in this project is based on the approach detailed in 
+              <a href="https://austinmorlan.com/posts/entity_component_system/"><b>Austin Morlan’s ECS article</b></a>. This relatively straightforward design focuses on 
+              separating data (components) from behavior (systems), offering a clean and modular way to manage entities in a scene. While it’s not the most advanced 
+              or optimized ECS out there, it was instrumental in understanding 
+              the core principles behind ECS architectures, such as data-oriented design, cache efficiency, and decoupling logic. Building this system from 
+              the ground up provided valuable insights into both the benefits and the challenges of such a system.
+            </p>
+          </div>
+          <div class="section-image">
+            <img src="img/learnopengl_6.jpg" alt="Features Screenshot" class="section-img" />
+          </div>
+        </div>
+      </section>
+      <hr class="section-divider" />
+      <section id="challenges" class="project-section">
+        <div class="section-flex">
+          <div class="section-text">
+            <h3 class="section-title">Project Challenges</h3>
+            <p>
+              As a learning-focused, hobby project, one of the biggest challenges has been maintaining motivation and using limited free time effectively. The primary goal was to 
+              explore the basics of computer graphics through OpenGL, but as the project grew in complexity—with features like world editing, loading/saving, screen space reflections, 
+              and atmospheric sky simulation—the lack of a solid foundational software architecture began to surface. Over time, the codebase became more difficult to 
+              manage and extend, especially as both rendering and editor functionality evolved in parallel. As a result, the project is currently on hold, with future efforts 
+              likely to focus more narrowly on rendering techniques rather than building a full-fledged editor. This shift allows for deeper exploration of visual fidelity and 
+              performance, without the overhead of maintaining complex UI and scene management systems.
+            </p>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html> 

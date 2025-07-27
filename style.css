@@ -395,6 +395,7 @@ a:active, a:focus {
 }
 a:hover {
   color: #555;
+  text-decoration: underline;
 } 
 
 .toc-list {
